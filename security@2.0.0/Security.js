@@ -55,10 +55,12 @@ var __spread = (this && this.__spread) || function () {
     for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
     return ar;
 };
-if (typeof (forge) === "undefined") {
-    if (typeof ($) !== "undefined") {
-    }
-    console.log("forge not supported");
+if (typeof (forge) === "undefined" && typeof ($) !== "undefined") {
+    $.getScript("https://cdn.jsdelivr.net/npm/node-forge@0.9.1/dist/forge.min.js").done(function () {
+        console.log("forge javascript auto include");
+    }).fail(function () {
+        console.log("forge not supported");
+    });
 }
 var Convert = /** @class */ (function () {
     function Convert() {

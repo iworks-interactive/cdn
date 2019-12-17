@@ -1,12 +1,12 @@
 declare let forge:typeof import('node-forge');
 
-if (typeof(forge) === "undefined")
+if (typeof(forge) === "undefined" && typeof($) !== "undefined")
 {
-    if(typeof($) !== "undefined")
-    {
-
-    }
-    console.log("forge not supported");
+    $.getScript("https://cdn.jsdelivr.net/npm/node-forge@0.9.1/dist/forge.min.js").done(()=>{
+    console.log("forge javascript auto include");
+    }).fail(()=>{
+        console.log("forge not supported");
+    });
 }
 
 class Convert {
