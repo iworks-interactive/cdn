@@ -1,0 +1,14 @@
+{
+  "name": "cdn",
+  "version": "1.0.0",
+  "main": "",
+  "repository": "https://github.com/iworks-interactive/cdn",
+  "author": "karminea <karminea@live.co.kr>",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.3"
+  }
+}
