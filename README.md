@@ -14,3 +14,5 @@
     - forge : https://cdn.jsdelivr.net/npm/node-forge@0.9.1/dist/forge.min.js
 * 유용한 CDN
     - jquery : https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js
+    - babel : https://unpkg.com/@babel/standalone@7.7.6/babel.min.js
+        - babel 사용시 <code><script type="text/babel" data-presets="es2015,stage-2"></code> or <code><script type="text/babel" src="foo.js"></script></code>
