@@ -1,15 +1,13 @@
-declare let forge:any;
+declare let forge:typeof import('node-forge');
 
 if (typeof(forge) === "undefined")
 {
+    if(typeof($) !== "undefined")
+    {
+
+    }
     console.log("forge not supported");
 }
-else
-{
-    console.log("forge supported");
-}
-
-
 
 class Convert {
     public static bin2dec = (s:string) => parseInt(s, 2).toString(10);

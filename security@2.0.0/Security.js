@@ -56,10 +56,9 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 if (typeof (forge) === "undefined") {
+    if (typeof ($) !== "undefined") {
+    }
     console.log("forge not supported");
-}
-else {
-    console.log("forge supported");
 }
 var Convert = /** @class */ (function () {
     function Convert() {
