@@ -29,7 +29,8 @@ try {
                 eventUrl: eventUrl,
                 eventLineNumber: eventLineNumber,
                 eventColNumber: eventColNumber,
-                eventStack: eventStack
+                eventStack: eventStack,
+                dataType: "json"
             };
             if (typeof ($) === "function" || typeof (jQuery) === "function") {
                 $.post("//error.iwi.co.kr/api/Error/stack", data);
@@ -46,7 +47,7 @@ try {
                 });
             }
             else {
-                var query = "protocol=" + protocol + "&host=" + encodeURIComponent(host) + "&port=" + port + "&path=" + encodeURIComponent(path) + "&search=" + encodeURIComponent(search) + "&hash=" + encodeURIComponent(hash) + "&everntMessage=" + encodeURIComponent(everntMessage) + "&eventUrl=" + encodeURIComponent(eventUrl) + "&eventLineNumber=" + eventLineNumber + "&eventColNumber=" + eventColNumber + "&eventStack=" + encodeURIComponent(eventStack);
+                var query = "type=image&protocol=" + protocol + "&host=" + encodeURIComponent(host) + "&port=" + port + "&path=" + encodeURIComponent(path) + "&search=" + encodeURIComponent(search) + "&hash=" + encodeURIComponent(hash) + "&everntMessage=" + encodeURIComponent(everntMessage) + "&eventUrl=" + encodeURIComponent(eventUrl) + "&eventLineNumber=" + eventLineNumber + "&eventColNumber=" + eventColNumber + "&eventStack=" + encodeURIComponent(eventStack);
                 new Image().src = "//error.iwi.co.kr/api/Error/stack?" + query;
             }
         }
