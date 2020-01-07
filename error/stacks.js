@@ -1,6 +1,12 @@
 try {
     window.onerror = function (eventOrMessage, url, lineNumber, colNumber, error) {
         try {
+            var protocol = document.location.protocol;
+            var host = document.location.hostname;
+            var port = document.location.port;
+            var path = document.location.pathname;
+            var search = document.location.search;
+            var hash = document.location.hash;
             var everntMessage = "";
             if (typeof eventOrMessage !== 'string') {
                 everntMessage = eventOrMessage.type + " " + eventOrMessage.target + " " + eventOrMessage.eventPhase + " " + eventOrMessage.composedPath();
@@ -8,10 +14,25 @@ try {
             else {
                 everntMessage = eventOrMessage;
             }
-            var stack = (error && error.stack) ? (function () { return error.stack.split("\n").map(function (x) { return x.trim(); }).join(" "); })() : "";
-            var userAgent = window.navigator.userAgent;
+            var eventUrl = url ? url : "";
+            var eventLineNumber = lineNumber ? lineNumber : 0;
+            var eventColNumber = colNumber ? colNumber : 0;
+            var eventStack = (error && error.stack) ? (function () { return error.stack.split("\n").map(function (x) { return x.trim(); }).join(" "); })() : "";
+            var data = {
+                protocol: protocol,
+                host: host,
+                port: port,
+                path: path,
+                search: search,
+                hash: hash,
+                everntMessage: everntMessage,
+                eventUrl: eventUrl,
+                eventLineNumber: eventLineNumber,
+                eventColNumber: eventColNumber,
+                eventStack: eventStack
+            };
             if (typeof ($) === "function" || typeof (jQuery) === "function") {
-                $.post("//error.iwi.co.kr/api/Error/stack", { "e": everntMessage, "j": url, "l": lineNumber, "c": colNumber, "s": stack });
+                $.post("//error.iwi.co.kr/api/Error/stack", data);
             }
             else if (typeof (fetch) === "function") {
                 fetch("//error.iwi.co.kr/api/Error/stack", {
@@ -21,11 +42,12 @@ try {
                     },
                     mode: "cors",
                     cache: "no-cache",
-                    body: JSON.stringify({ "e": everntMessage, "j": url, "l": lineNumber, "c": colNumber, "s": stack })
+                    body: JSON.stringify(data)
                 });
             }
             else {
-                new Image().src = "//error.iwi.co.kr/api/Error/stack?e=" + encodeURIComponent(everntMessage) + "&j=" + encodeURIComponent(url) + "&l=" + encodeURIComponent(lineNumber) + "&c=" + encodeURIComponent(colNumber) + "&s=" + encodeURIComponent(stack);
+                var query = "protocol=" + protocol + "&host=" + encodeURIComponent(host) + "&port=" + port + "&path=" + encodeURIComponent(path) + "&search=" + encodeURIComponent(search) + "&hash=" + encodeURIComponent(hash) + "&everntMessage=" + encodeURIComponent(everntMessage) + "&eventUrl=" + encodeURIComponent(eventUrl) + "&eventLineNumber=" + eventLineNumber + "&eventColNumber=" + eventColNumber + "&eventStack=" + encodeURIComponent(eventStack);
+                new Image().src = "//error.iwi.co.kr/api/Error/stack?" + query;
             }
         }
         catch (_a) {
